@@ -85,7 +85,7 @@ list_of_potions = [
 ]
 
 class Potions:
-    def __init__(self, potion_name = "holder", ingredients = ["fire", "air", "wind", "water"], description = "This potions heals wound."):
+    def __init__(self, potion_name = "holder", ingredients = ["fire", "air", "air", "water"], description = "This potions heals wound."):
         self.potion_name = potion_name
         self.ingredients = ingredients
         self.description = description

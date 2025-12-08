@@ -10,8 +10,7 @@ RED = '\033[31m'
 RESET = '\033[0m'
 UNDERLINED = '\033[4m'
 
-game_title = r"""
-
+game_title = f"""{BOLD}
 $$$$$$$\                                                                    $$$$$$$\                                    
 $$  __$$\                                                                   $$  __$$\                                   
 $$ |  $$ | $$$$$$\   $$$$$$\  $$\  $$\  $$\        $$$$$$\   $$$$$$\        $$ |  $$ | $$$$$$\   $$$$$$\  $$$$$$\$$$$\  
@@ -19,7 +18,7 @@ $$$$$$$\ |$$  __$$\ $$  __$$\ $$ | $$ | $$ |      $$  __$$\ $$  __$$\       $$$$
 $$  __$$\ $$ |  \__|$$$$$$$$ |$$ | $$ | $$ |      $$ /  $$ |$$ |  \__|      $$  __$$\ $$ /  $$ |$$ /  $$ |$$ / $$ / $$ |
 $$ |  $$ |$$ |      $$   ____|$$ | $$ | $$ |      $$ |  $$ |$$ |            $$ |  $$ |$$ |  $$ |$$ |  $$ |$$ | $$ | $$ |
 $$$$$$$  |$$ |      \$$$$$$$\ \$$$$$\$$$$  |      \$$$$$$  |$$ |            $$$$$$$  |\$$$$$$  |\$$$$$$  |$$ | $$ | $$ |
-\_______/ \__|       \_______| \_____\____/        \______/ \__|            \_______/  \______/  \______/ \__| \__| \__|                                                                                                                                                                                                                    
+\_______/ \__|       \_______| \_____\____/        \______/ \__|            \_______/  \______/  \______/ \__| \__| \__|{RESET}                                                                                                                                                                                                       
 """
 
 game_witch = r"""    
@@ -111,7 +110,7 @@ tips = f"""
                     Some customers might be impatient, but it’s okay if you not ready yet. 
                     A wrong brew can be dangerous… and very explosive. It will {RED}{ITALIC}kill{RESET} you.
 
-                    Always follow each recipe {ITALIC}{CYAN}{UNDERLINED}STEP BY STEP{RESET}.
+                    Always follow the {ITALIC}{CYAN}{UNDERLINED}ORDER{RESET} of potions to be brew and its corresponding recipe {ITALIC}{CYAN}{UNDERLINED}STEP BY STEP{RESET}.
                     Your mother left you her old Potion Book, filled with the proper ingredient
                     orders. Whenever you feel unsure, open the book and check the recipes carefully.
 
@@ -124,14 +123,15 @@ tips = f"""
     """
 
 game_guide_customer = f"""
-    {CYAN}“Hello there! I would like to buy a Potion of Invisibility, please!”{RESET}
+    {CYAN}"Hello there! I would like to buy a Potion of Invisibility, please!"{RESET}
 """
 
 game_guide_starting = f"""
     {ITALIC}This is your {BOLD}first customer.{RESET}
     To help them, you need to brew the potion they requested."
-    Remember: in Apitong’s Potion Shop, the order of ingredients is very 
-    important. One wrong step… and things might {RED}explode and kill you{RESET}.",
+    Remember: in Apitong’s Potion Shop, the order of {BOLD}POTIONS{RESET}
+    to brew and the {BOLD}INGREDIENTS{RESET} needed is very important. One wrong step… 
+    and things might {RED}explode and kill you{RESET}.",
 
     Let’s take things slowly, yes? Ready? Please read the guide below.
 
@@ -151,8 +151,7 @@ game_guide = f"""
         ╚╦╝│ ││ │├┬┘  ╠═╣│   │ ││ ││││o
          ╩ └─┘└─┘┴└─  ╩ ╩└─┘ ┴ ┴└─┘┘└┘o
             [1] Potion's Book
-            [2] Brew Potion
-            [3] Give it to Customer {RESET}
+            [2] Brew Potion {RESET}
     
             
     For now, let's focus on Potion’s Book.
@@ -170,7 +169,7 @@ game_guide = f"""
          ╩ └─┘└─┘┴└─  ╩ ╩└─┘ └┘ └─┘o
             [1] Add Ingredient
             [2] Undo Move
-            [3] View Potion's Details
+            [3] View Current Ingredients
             [4] Finish Brewing {RESET}
  
             
@@ -189,17 +188,11 @@ game_guide = f"""
 
         ----------------------------------------------------------------
 
-        ⭐ {BOLD}{UNDERLINED}View Potion's Details{RESET}
-        If you forget the steps, you can always choose View to check the 
-        ingredients again. Just type the potion’s name.
-
-            {ITALIC}For example:
-                View: Invisibility{RESET}
-
-        It will show the ingredient list and its description.
-        Important: Only type the main name of the potion.
-        If the potion is {BOLD}Potion of Healing{RESET}, type only: {BOLD}Healing{RESET}
-
+        ⭐ {BOLD}{UNDERLINED}View Current Ingredients{RESET}
+        If you forgot the current ingredients you have added,
+        you can always do this move in order to view the current
+        progress in the added ingredients
+        
         ----------------------------------------------------------------
 
         ⭐ {BOLD}{UNDERLINED}Finish Brewing{RESET}
@@ -211,6 +204,11 @@ game_guide = f"""
 
         If they want multiple potions, simply repeat the same steps 
         for each one.
+
+        
+
+    {BOLD}So please always double-check the potion in the Book before brewing,
+    your {RED}{UNDERLINED}LIFE{RESET} depends on it.
 """
 
 
@@ -255,36 +253,33 @@ def animate_string(string, type_of_animation = 0, delay = 0.1, blinking = 0):
             time.sleep(delay)
 
 def game_start():
-    animate_string(game_title, type_of_animation = 0, delay = 0.4, blinking = 3)
-    print(game_witch)
-    time.sleep(3)
+    # animate_string(game_title, type_of_animation = 0, delay = 0.4, blinking = 3)
+    # print(game_witch)
+    # time.sleep(3)
 
+    # os.system('cls')
+    # print(game_title)
+    # print(breaker)
+    # animate_string(game_intro_story, 1, 0.03)
+    # print(breaker)
+    # time.sleep(3)
+
+    # os.system('cls')
+    # print(game_title)
+    # print(breaker)
+    # print(tips)
+    # print(breaker)
+
+    # time.sleep(8)
     os.system('cls')
-    print(game_title)
-    print(breaker)
-    animate_string(game_intro_story, 1, 0.03)
-    print(breaker)
-    time.sleep(3)
-
-    os.system('cls')
-    print(game_title)
-    print(breaker)
-    print(tips)
-    print(breaker)
-
-    time.sleep(8)
-    os.system('cls')
-    print(game_title)
-    print(breaker + "\n")
-    animate_string(game_guide_customer, type_of_animation = 1, delay = 0.03)
-    time.sleep(2)
-    animate_string(game_guide_starting, type_of_animation = 1, delay = 0.03)
-    time.sleep(2)
-
-    print(game_guide)
 
 def game_proper():
-    print(game_title)
+    # print(game_title)
+    # print(breaker + "\n")
+    # animate_string(game_guide_customer, type_of_animation = 1, delay = 0.03)
+    # time.sleep(2)
+    # animate_string(game_guide_starting, type_of_animation = 1, delay = 0.03)
+    # time.sleep(2)
     print(game_guide)
     while(True):
         player_input = input("Proceeds to Game[Y/y]: ")
@@ -294,5 +289,5 @@ def game_proper():
 
         else:
             print(f"{FAINT}{ITALIC}     I don't quite get it!{RESET}")
-    
+    os.system('cls')
     return True
