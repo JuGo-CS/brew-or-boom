@@ -192,7 +192,7 @@ class HashTableLP:
 
     def put(self, key, value):
         index = self.hash_index(key)  # Start at hash index
-        # print(f"Key: {key} \nIndex: {index}\n")
+        print(f"Key: {key} \nIndex: {index}\n")
         start_index = index
 
         if self.size == self.array.capacity:

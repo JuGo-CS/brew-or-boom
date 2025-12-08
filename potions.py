@@ -4,81 +4,81 @@ list_of_potions = [
 
     # 3 ingredient potions
     [
-        "Potion of Healing",
+        "Healing",
         ["Water", "Earth", "Water"],
         "This potion will heal any small cuts you have. If the user smells fresh morning dew, it's working."
     ],
     [
-        "Potion of Speed",
+        "Speed",
         ["Air", "Fire", "Air"],
         "A sharp taste that gives a burst of speed. If you drink it too fast, you'll dash straight into a wall."
     ],
     [
-        "Potion of Bravery",
+        "Bravery",
         ["Fire", "Earth", "Fire"],
         "Warms your chest and boosts bravery immensely. This is perfect before you talk to your crush."
     ],
     [
-        "Potion of Sleep",
+        "Sleep",
         ["Water", "Air", "Earth"],
         "This brew helps you fall asleep peacefully. Be warned: it is not recommended while standing up."
     ],
     [
-        "Potion of Glow",
+        "Glow",
         ["Fire", "Water", "Air"],
         "Makes your body glow faintly like a candle. This is great if the buyer needs to read in the dark."
     ],
 
     # 4 ingredient potions
     [
-        "Potion of Night Vision",
+        "Night Vision",
         ["Air", "Water", "Air", "Fire"],
         "Helps you see in the dark effectively. Be aware that everything may look a little greenish."
     ],
     [
-        "Potion of Fire Shield",
+        "Fire Shield",
         ["Earth", "Water", "Fire", "Fire"],
         "This formula protects you from small burns. It is good for cooking dragons’ eggs—if you find any."
     ],
     [
-        "Potion of Water Breathing",
+        "Water Breathing",
         ["Water", "Water", "Air", "Earth"],
         "This elixir lets you breathe underwater for an extended period. The only side effect is slight fish-like burping."
     ],
     [
-        "Potion of Focus",
+        "Focus",
         ["Earth", "Air", "Water", "Air"],
         "A clear liquid that clears your thoughts and keeps you focused. Students love this one during exams."
     ],
     [
-        "Potion of High Jump",
+        "High Jump",
         ["Air", "Fire", "Air", "Earth"],
         "Makes your jumps lighter and higher when consumed. Do not try jumping off roofs though."
     ],
 
     # 5 ingredient potions
     [
-        "Potion of Strength",
+        "Strength",
         ["Earth", "Fire", "Earth", "Fire", "Water"],
         "This potion greatly boosts strength for a short time. You might accidentally crush cups, so be careful."
     ],
     [
-        "Potion of Water Ward",
+        "Water Ward",
         ["Water", "Earth", "Water", "Air", "Water"],
         "Creates a swirling water shield around you when activated. This is perfect for rainy adventures."
     ],
     [
-        "Potion of Fire Burst",
+        "Fire Burst",
         ["Fire", "Fire", "Air", "Fire", "Water"],
         "Allows the user to release a small burst of flame from their hands. Keep away from curtains when using."
     ],
     [
-        "Potion of Agility",
+        "Ultra Speed",
         ["Air", "Air", "Earth", "Air", "Fire"],
         "Lets you move with wind-like agility. People might hear whooshing noises when you walk."
     ],
     [
-        "Potion of Lantern",
+        "Lantern",
         ["Fire", "Water", "Air", "Water", "Air"],
         "Upon drinking, you summon a floating glowing orb that follows you around. A great night companion."
     ]
@@ -104,11 +104,3 @@ class Potions:
         
 
         return potion_catalog
-
-
-
-
-
-
-
-

@@ -1,6 +1,14 @@
 import time
 import os
 
+#for game aesthetics
+BOLD = '\033[1m'
+FAINT = '\033[2m'
+ITALIC = '\033[3m' 
+CYAN = '\033[36m'
+RED = '\033[31m'
+RESET = '\033[0m'
+
 game_title = r"""
 
 $$$$$$$\                                                                    $$$$$$$\                                    
@@ -62,14 +70,48 @@ game_witch = r"""
     ....................-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@:.......:.......:..:..
 """
 
+breaker = "------------------------------------------------------------------------------------------------------------------------"
+
+game_intro_story = f"""
+
+                In the quiet village of {BOLD}{ITALIC}Apitong{RESET}, you lived a peaceful life with your mother.
+                She was the village’s Head Witch, known for her potions that healed, protected, and 
+                helped everyone. Her little shop was the heart of Apitong, without her potions, the 
+                villagers would struggle.
+
+                Every morning, she brewed remedies. Every night, she taught you small spells.
+                Life was calm… until everything changed.
+
+                One day, an {RED} unexplainable magical accident {RESET} struck the shop.
+                A strange burst of energy filled the air, and your mother fell terribly ill.
+                No healer, no spell, no potion could save her.
+
+                Before she passed, she placed your hands on the old wooden counter and whispered:
+
+                {CYAN}{ITALIC}“The village needs you now. Take care of the shop… and be careful with the recipes.” {RESET}
+
+                {FAINT}And just like that, you became the new keeper of the potion shop. {RESET}
+
+                Now it’s your turn to brew the potions Apitong depends on.
+                With only four basic ingredients, {ITALIC} Earth, Water, Fire, and Air,{RESET} and your mother’s old 
+                recipe book, you must keep the shop running.
+
+                Customers will come. Requests will grow.
+                And you must mix each potion in the exact order…
+                or the whole shop might explode.
+
+                Your story begins here.
+                {BOLD}Welcome to {ITALIC} Apitong’s Potion Shop. {RESET}
+
+"""
+
+
 
 """
     This function is dynamic. It can be use to apply animation for strings.
 
     type_of_animation is either "line_by_line" = [0] or "char_by_char" = [1]
     Can also use the blinking feature
-
-
 """
 
 def animate_string(string, type_of_animation = 0, delay = 0.1, blinking = 0):
@@ -108,5 +150,9 @@ def animate_string(string, type_of_animation = 0, delay = 0.1, blinking = 0):
 def game_start():
     animate_string(game_title, type_of_animation = 0, delay = 0.4, blinking = 3)
     print(game_witch)
-
     time.sleep(3)
+    os.system('cls')
+    print(game_title)
+    print(breaker)
+    animate_string(game_intro_story, 1, 0.03)
+    print(breaker)
