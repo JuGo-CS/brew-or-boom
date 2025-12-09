@@ -143,7 +143,7 @@ def player_brew_action():
 def potion_randomizer():
     total_potions = game_difficulty
     picked_entries = [] 
-    max_index = potion_catalog.size - 1
+    # max_index = potion_catalog.size - 1
     
     valid_entries = []
     for entry in potion_catalog.array:
@@ -151,7 +151,9 @@ def potion_randomizer():
             valid_entries.append(entry)
 
     for i in range(total_potions):
+        # index_picked = random.randint(0, len(potions.list_of_potions))
         random_entry = random.choice(valid_entries)
+        # random_entry = potions.list_of_potions[index_picked]
         picked_entries.append(random_entry)
     
     return picked_entries
@@ -244,17 +246,62 @@ def print_current_ingredients(current_ingredients):
         current_ingredients.enqueue(temp_queue_ingredients.dequeue())
     print(f"{CYAN}-------------------------------------------------{RESET}\n")
 
+#this function is for printing the valid ingredients (just to show to the player what should be the correct order/ingredients of that potion)
+def game_validation(players_ingredients_queue, potions_ingredients):
+
+    print(game_aesthetics.breaker)
+    print(f"\n{BOLD}    Oh noooo!!! You make a big {UNDERLINED}MISTAKE{RESET}!")
+    print(f"\n        Correct Potion's Ingredients {ITALIC}inorder{RESET}: ")
+    counter = 1
+
+    #basically prints the correct order of ingredients
+    while not potions_ingredients.is_empty():
+        item = potions_ingredients.dequeue()
+
+        print(f"            [{counter}]{item}")
+        counter += 1
+
+    print(f"\n        Your Potion's Ingredients {ITALIC}inorder{RESET}: ")
+    counter = 1
+
+    #prints the player's ingredients
+    while not players_ingredients_queue.is_empty():
+        item = players_ingredients_queue.dequeue()
+
+        print(f"            [{counter}]{item}")
+        counter += 1
+
+    print("\n" + game_aesthetics.breaker)
+    time.sleep(5)
+
 #this function is to check wether the ingredients is correct, will return the verdict
-def check_correct_ingredients(ingredients_queue, potions_ingredients):
+def check_correct_ingredients(players_ingredients_queue, potions_ingredients):
     is_same_ingredients = True
 
-    if ingredients_queue.size != potions_ingredients.size:
+    if players_ingredients_queue.size != potions_ingredients.size:
         is_same_ingredients = False
+        game_validation(players_ingredients_queue, potions_ingredients)
+        
 
     else:
-        while not ingredients_queue.is_empty():
-            if ingredients_queue.dequeue() != potions_ingredients.dequeue():
+        # while not players_ingredients_queue.is_empty():
+        # will iterate in the size of the ingredients of that potion
+        for i in range(potions_ingredients.size):
+            #this is the correct ingredients
+            potions_ingredients_holder = potions_ingredients.dequeue() # will hold first the item 
+            potions_ingredients.enqueue(potions_ingredients_holder)  # and push it also in our original SLL queue so that the value will not be remove, 
+                                                                     # it will be stored at the back
+
+            #this naman is the holder for the player's ingredients
+            players_ingredients_queue_holder = players_ingredients_queue.dequeue()
+            players_ingredients_queue.enqueue(players_ingredients_queue_holder)
+
+            if potions_ingredients_holder != players_ingredients_queue_holder:
                 is_same_ingredients = False
+
+        #it means that the ingredients are not the same, we will print the correct and the player's version
+        if not is_same_ingredients:
+            game_validation(players_ingredients_queue, potions_ingredients)
 
     return is_same_ingredients
 
@@ -288,11 +335,14 @@ def brewing_potion(brew_inorder_potions):
                 print_current_ingredients(ingredients_queue)
         
         elif brew_action == 4: # player choosing to finish brewing of the current potion
+            
             is_ingredients_correct = check_correct_ingredients(ingredients_queue, potions_ingredients)
 
             if is_ingredients_correct:
                 return True
             else:
+                print("Correct ")
+
                 return False
 
 def proceeds():
@@ -309,7 +359,6 @@ def proceeds():
         else:
             print(f"{FAINT}{ITALIC}     I don't quite get it!{RESET}")
     os.system('cls')
-
 
 def create_SLLQueue(list_of_picked_entries):
     object_SLLQueue= SLLQueue()
@@ -373,6 +422,7 @@ if(game_aesthetics.game_proper()):
                         print(game_aesthetics.breaker)
                         print(buyers_script)
                         print_potions_request(brew_inorder_potions)
+
                 elif not succesfully_brewed_potion:
                     game_over = True
                     break
@@ -387,37 +437,9 @@ if(game_aesthetics.game_proper()):
             time_difficulty_updated = current_time
             game_difficulty += 1
 
-    # os.system('cls')
-    print("Game Over!")        
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+game_aesthetics.game_over() 
 
 
 # list_of_picked_entries = potion_randomizer()
