@@ -260,17 +260,17 @@ def game_start():
     os.system('cls')
     print(game_title)
     print(breaker)
-    # animate_string(game_intro_story, 1, 0.03)
-    # print(breaker)
-    # time.sleep(3)
+    animate_string(game_intro_story, 1, 0.03)
+    print(breaker)
+    time.sleep(3)
 
-    # os.system('cls')
-    # print(game_title)
-    # print(breaker)
-    # print(tips)
-    # print(breaker)
+    os.system('cls')
+    print(game_title)
+    print(breaker)
+    print(tips)
+    print(breaker)
 
-    # time.sleep(8)
+    time.sleep(8)
     os.system('cls')
 
 def game_proper():
