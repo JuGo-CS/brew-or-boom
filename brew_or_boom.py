@@ -70,6 +70,7 @@ potion_catalog_string = f"""
 ╠═╝║ ║ ║ ║║ ║║║║  ║  ╠═╣ ║ ╠═╣║  ║ ║║ ╦
 ╩  ╚═╝ ╩ ╩╚═╝╝╚╝  ╚═╝╩ ╩ ╩ ╩ ╩╩═╝╚═╝╚═╝"""
 
+#this function will just prints the list of potions (potions catalog)
 def display_potion_catalog(catalog, original_queue,  buyers_script):
     print(potion_catalog_string)
     print("\n" + "-"*40 + "\n")
@@ -93,6 +94,7 @@ def display_potion_catalog(catalog, original_queue,  buyers_script):
         print(f"    Description: {description}")
         print("\n" + "-"*40 + "\n")
     
+    # will not exit on this part until the player inputs Y or y
     while(True):
         player_input = input("Close the Potion's Catalog[Y/y]: ")
 
@@ -107,7 +109,9 @@ def display_potion_catalog(catalog, original_queue,  buyers_script):
     print(buyers_script)
     print_potions_request(original_queue)
     
+# this function is for getting the player's action
 def player_action():
+    # will not exit/return unless the player's input is within the range
     while(True):
         print(action_list)
         try:
@@ -123,7 +127,9 @@ def player_action():
     
     return players_input
 
+# this function is for getting the player's action if they are already inside of the brewing part
 def player_brew_action():
+    #will run definitely until valid input
     while(True):
         print(brew_potion_list)
 
@@ -140,16 +146,19 @@ def player_brew_action():
     
     return players_brew_input
 
+#basicaclly returns a randomize potions to be pick by the 'buyer' in the game
 def potion_randomizer():
-    total_potions = game_difficulty
+    total_potions = game_difficulty #number of potions to be pick
     picked_entries = [] 
     # max_index = potion_catalog.size - 1
     
+    #first will get all of the valid nodes (nodes that has value)
     valid_entries = []
     for entry in potion_catalog.array:
         if entry is not None:
             valid_entries.append(entry)
 
+    # then proceeds to picking a randomize potion
     for i in range(total_potions):
         # index_picked = random.randint(0, len(potions.list_of_potions))
         random_entry = random.choice(valid_entries)
@@ -216,6 +225,7 @@ def adding_ingredients():
     
     return return_ingredients
 
+#will undo the last ingredients added
 def undo_ingredients(ingredients_queue):
     temp_queue = SLLQueue()
 
@@ -296,7 +306,7 @@ def check_correct_ingredients(players_ingredients_queue, potions_ingredients):
             players_ingredients_queue_holder = players_ingredients_queue.dequeue()
             players_ingredients_queue.enqueue(players_ingredients_queue_holder)
 
-            if potions_ingredients_holder != players_ingredients_queue_holder:
+            if potions_ingredients_holder != players_ingredients_queue_holder: # meaning mali ang ingredients, then set the checker to False
                 is_same_ingredients = False
 
         #it means that the ingredients are not the same, we will print the correct and the player's version
@@ -305,18 +315,23 @@ def check_correct_ingredients(players_ingredients_queue, potions_ingredients):
 
     return is_same_ingredients
 
+# this function is a bit heavy because this is the core function of the game
+# this holds the logic on brewing a potion
+# if the player choose to brew a potion, this function will be called. Then starts the process of making the potion
 def brewing_potion(brew_inorder_potions):
-    ingredients_queue = SLLQueue()
+    ingredients_queue = SLLQueue() # creates a SLLQueue to store the ingredients added by our player
 
-    current_object = brew_inorder_potions.dequeue()
-    current_potion = current_object.value
+    current_object = brew_inorder_potions.dequeue() # get the first potion to be brewed (nodes)
+    current_potion = current_object.value #then get the value(the potion) in the node
 
     potions_ingredients = SLLQueue()
+    # we need to store the correct order of the ingredients of the potion
     for ingredients in current_potion.ingredients:
         potions_ingredients.enqueue(ingredients)
 
     print(f"\n\n    Current Potion to be Brewed:\n        {BOLD}Potion of {UNDERLINED}{current_potion.potion_name}{RESET}\n")
 
+    # loop for the brewing part of the potion
     while(True):
         brew_action = player_brew_action()
         if brew_action == 1:    # player want's to add 
@@ -336,7 +351,7 @@ def brewing_potion(brew_inorder_potions):
         
         elif brew_action == 4: # player choosing to finish brewing of the current potion
             
-            is_ingredients_correct = check_correct_ingredients(ingredients_queue, potions_ingredients)
+            is_ingredients_correct = check_correct_ingredients(ingredients_queue, potions_ingredients) #go to the checking of the ingredients if correct or nah
 
             if is_ingredients_correct:
                 return True
@@ -345,6 +360,8 @@ def brewing_potion(brew_inorder_potions):
 
                 return False
 
+# will show this if the player succesfully brewed the customer's potion
+# then after this, proceeds to next customer
 def proceeds():
     os.system('cls')
     print(game_aesthetics.game_title)
@@ -360,6 +377,7 @@ def proceeds():
             print(f"{FAINT}{ITALIC}     I don't quite get it!{RESET}")
     os.system('cls')
 
+#use to create a SLL queue of the potions to be brewed
 def create_SLLQueue(list_of_picked_entries):
     object_SLLQueue= SLLQueue()
 
@@ -378,52 +396,52 @@ def create_SLLQueue(list_of_picked_entries):
 potion_instance = Potions()
 potion_catalog = potion_instance.potion_recipe()
 
-game_aesthetics.game_start()
+game_aesthetics.game_start() # to start the animation (game aesthetics)
 start_time = time.time()
 time_difficulty_updated = start_time
 game_difficulty = 1
 TIME_INTERVAL = 120 #in second
 
 
-if(game_aesthetics.game_proper()):
+if(game_aesthetics.game_proper()): #if the game starts
     game_over = False
 
     while(True):
         print(game_aesthetics.game_title)
         print(game_aesthetics.breaker)
 
-        list_of_picked_entries = potion_randomizer()
+        list_of_picked_entries = potion_randomizer() # will pick a random potions for the player to brew
         buyers_script = random.choice(buyer_scripts)
         game_aesthetics.animate_string(buyers_script, 1, 0.03)
 
-        brew_inorder_potions = create_SLLQueue(list_of_picked_entries)
-        print_potions_request(brew_inorder_potions)
+        brew_inorder_potions = create_SLLQueue(list_of_picked_entries) # creates a SLL queue for the potions to brew
+        print_potions_request(brew_inorder_potions) #prints the potions in order
         
         while(True):
 
-            next_action = player_action()
+            next_action = player_action() #will get the action of the player, wether to see the potions book or to brew a potion
                 
             if next_action == 1: # View Potion's Book
                 display_potion_catalog(potions.list_of_potions, brew_inorder_potions, buyers_script)
 
             elif next_action == 2: # Proceeds on brewing the potion
-                succesfully_brewed_potion = brewing_potion(brew_inorder_potions)
+                succesfully_brewed_potion = brewing_potion(brew_inorder_potions) # will determine if tama ba yung potion na na-brew
 
                 if succesfully_brewed_potion:
 
-                    if brew_inorder_potions.is_empty():
-                        proceeds()
+                    if brew_inorder_potions.is_empty(): # if wala ng next na potion,
+                        proceeds()                      # continue to the next customer 'buyer'
                         os.system('cls')
                         break
                     
-                    else:
+                    else: # if may laman pa, continue lang sa current buyer
                         os.system('cls')
                         print(game_aesthetics.game_title)
                         print(game_aesthetics.breaker)
                         print(buyers_script)
                         print_potions_request(brew_inorder_potions)
 
-                elif not succesfully_brewed_potion:
+                elif not succesfully_brewed_potion: # if the brewed potion is not correct, then game over
                     game_over = True
                     break
                    
@@ -431,6 +449,7 @@ if(game_aesthetics.game_proper()):
         if game_over:
             break
         
+        # this line is for determining the current difficulty. This dictates how many potions the buyer will buy
         current_time = time.time()
         time_elapse = current_time - time_difficulty_updated
         if(time_elapse >= TIME_INTERVAL and game_difficulty < 3):

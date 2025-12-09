@@ -289,6 +289,7 @@ game_over_dialogue = f"""
     The cauldron has claimed another victim.
 """
 
+#function that will animate the given string
 def animate_string(string, type_of_animation = 0, delay = 0.1, blinking = 0):
             
     if type_of_animation == 0: #[0] means type of animation is line by line
@@ -322,6 +323,7 @@ def animate_string(string, type_of_animation = 0, delay = 0.1, blinking = 0):
             print('\n'.join(string_as_list))
             time.sleep(delay)
 
+#this function mainly focuses on the game aesthetics. Para appealing yung game
 def game_start():
     animate_string(game_title, type_of_animation = 0, delay = 0.4, blinking = 3)
     print(game_witch)
@@ -343,6 +345,7 @@ def game_start():
     time.sleep(8)
     os.system('cls')
 
+#if the game starts, the following game aesthetics will be shown in the screen (includes tutorial and game guide)
 def game_proper():
     print(game_title)
     print(breaker + "\n")
@@ -362,6 +365,7 @@ def game_proper():
     os.system('cls')
     return True
 
+#if the pkayer looses
 def game_over():
     os.system('cls')
     animate_string(game_explosion, type_of_animation = 0, delay = 0.03, blinking = 5)
