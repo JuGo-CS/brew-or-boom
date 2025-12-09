@@ -332,7 +332,7 @@ potion_catalog = potion_instance.potion_recipe()
 game_aesthetics.game_start()
 start_time = time.time()
 time_difficulty_updated = start_time
-game_difficulty = 3
+game_difficulty = 1
 TIME_INTERVAL = 120 #in second
 
 
@@ -360,18 +360,22 @@ if(game_aesthetics.game_proper()):
             elif next_action == 2: # Proceeds on brewing the potion
                 succesfully_brewed_potion = brewing_potion(brew_inorder_potions)
 
-                if succesfully_brewed_potion and brew_inorder_potions.is_empty():
-                    proceeds()
+                if succesfully_brewed_potion:
+
+                    if brew_inorder_potions.is_empty():
+                        proceeds()
+                        os.system('cls')
+                        break
+                    
+                    else:
+                        os.system('cls')
+                        print(game_aesthetics.game_title)
+                        print(game_aesthetics.breaker)
+                        print(buyers_script)
+                        print_potions_request(brew_inorder_potions)
                 elif not succesfully_brewed_potion:
                     game_over = True
                     break
-            
-            os.system('cls')
-            print(game_aesthetics.game_title)
-            print(game_aesthetics.breaker)
-            print(buyers_script)
-            print_potions_request(brew_inorder_potions)
-
                    
 
         if game_over:

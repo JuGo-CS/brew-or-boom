@@ -253,13 +253,13 @@ def animate_string(string, type_of_animation = 0, delay = 0.1, blinking = 0):
             time.sleep(delay)
 
 def game_start():
-    # animate_string(game_title, type_of_animation = 0, delay = 0.4, blinking = 3)
-    # print(game_witch)
-    # time.sleep(3)
+    animate_string(game_title, type_of_animation = 0, delay = 0.4, blinking = 3)
+    print(game_witch)
+    time.sleep(3)
 
-    # os.system('cls')
-    # print(game_title)
-    # print(breaker)
+    os.system('cls')
+    print(game_title)
+    print(breaker)
     # animate_string(game_intro_story, 1, 0.03)
     # print(breaker)
     # time.sleep(3)
@@ -274,12 +274,12 @@ def game_start():
     os.system('cls')
 
 def game_proper():
-    # print(game_title)
-    # print(breaker + "\n")
-    # animate_string(game_guide_customer, type_of_animation = 1, delay = 0.03)
-    # time.sleep(2)
-    # animate_string(game_guide_starting, type_of_animation = 1, delay = 0.03)
-    # time.sleep(2)
+    print(game_title)
+    print(breaker + "\n")
+    animate_string(game_guide_customer, type_of_animation = 1, delay = 0.03)
+    time.sleep(2)
+    animate_string(game_guide_starting, type_of_animation = 1, delay = 0.03)
+    time.sleep(2)
     print(game_guide)
     while(True):
         player_input = input("Proceeds to Game[Y/y]: ")
